@@ -17,7 +17,7 @@ namespace DotnetAPI.Repositories {
 
         public string[] GetAllUsers() {
             return new string[] {
-                "SUCCESSFUL RETRIEVAL", this._dbConnection.ConnectionString, "ANOTHER STRING"
+                "SUCCESSFUL RETRIEVAL", this._dbConnection.ConnectionString, "ANOTHER STRING", this._dbConnection.QuerySingle<DateTime>("SELECT GETDATE()").ToString()
             };
         }
 
