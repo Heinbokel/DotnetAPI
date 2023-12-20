@@ -1,3 +1,9 @@
+using System.Data;
+using DotnetAPI.Repositories;
+using DotnetAPI.Repositories.Configuration;
+using DotnetAPI.Services;
+using Microsoft.Data.SqlClient;
+
 var builder = WebApplication.CreateBuilder(args); //Builder that builds the actual API/Server
 
 builder.Services.AddControllers(); //Adds our controllers to our application to find.
@@ -26,6 +32,20 @@ builder.Services.AddCors((options) =>
                     .AllowCredentials();
             });
     });
+
+//Add our mappings for dependency injection.
+
+//Repositories
+builder.Services.AddScoped<IDbConnection>(_ => new SqlConnection(builder.Configuration.GetConnectionString("DefaultConnection")));
+builder.Services.AddScoped<IUserRepository, UserRepository>();
+
+//Services
+builder.Services.AddScoped<IUserService, UserService>();
+
+//Singletons/Factories
+// builder.Services.AddSingleton<DatabaseConnectionFactory>(impl => {
+//     return new DatabaseConnectionFactory(builder.Configuration.GetConnectionString("DefaultConnection"));
+// });
 
 var app = builder.Build(); //app is our built application.
 

@@ -1,3 +1,4 @@
+using DotnetAPI.Services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DotnetAPI.Controllers;
@@ -7,17 +8,17 @@ namespace DotnetAPI.Controllers;
 public class UserController : ControllerBase
 {
 
-    public UserController() {
+    private IUserService _userService;
 
+    public UserController(IUserService userService) {
+        this._userService = userService;
     }
 
 
     [HttpGet("test/{testValue}", Name = "Test")]
     public string[] Test(string testValue, [FromQuery] string fromQuery1)
     {
-        return new string[]{
-            testValue, fromQuery1
-        };
+        return _userService.GetAllUsers();
     }
 
 }
