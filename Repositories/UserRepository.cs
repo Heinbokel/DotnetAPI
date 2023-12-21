@@ -8,7 +8,13 @@ namespace DotnetAPI.Repositories {
 
     public class UserRepository: IUserRepository {
 
-        private static readonly string GET_USERS_SQL = "";
+        private static readonly string GET_USERS_SQL = @"
+            SELECT * FROM TutorialAppSchema.Users
+        ".Trim();
+
+        private static readonly string WHERE_USER_ID_EQUALS = @"
+            WHERE TutorialAppSchema.Users.UserId = @UserId
+        ".Trim();
 
         private IDbConnection _dbConnection;
 
@@ -16,14 +22,15 @@ namespace DotnetAPI.Repositories {
             this._dbConnection = dbConnection;
         }
 
-        public List<User> GetUsers() {
-            return new List<User>() {
-                new User(){UserId = 1, Active = true, Email = "email@gmail.com", FirstName = "first", LastName = "lasdfast", Gender = "male"},
-                new User(){UserId = 2, Active = true, Email = "312@gmail.com", FirstName = "firstt", LastName = "lasdfast", Gender = "female"},
-                new User(){UserId = 3, Active = true, Email = "4234@gmail.com", FirstName = "fitttrst", LastName = "laasdst", Gender = "female"},
-                new User(){UserId = 4, Active = false, Email = "5253@gmail.com", FirstName = "firttst", LastName = "lasdfast", Gender = "male"},
-                new User(){UserId = 5, Active = true, Email = "523532@yahoo.com", FirstName = "ftttirst", LastName = "last", Gender = "female"}
+        public User GetUser(int UserId) {
+            var Params = new {
+                UserId = UserId
             };
+            return _dbConnection.QuerySingle<User>(GET_USERS_SQL + WHERE_USER_ID_EQUALS, Params);
+        }
+
+        public List<User> GetUsers() {
+            return _dbConnection.Query<User>(GET_USERS_SQL).ToList();
         }
 
     }

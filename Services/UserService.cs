@@ -11,6 +11,10 @@ namespace DotnetAPI.Services {
             _userRepository = userRepository;
         }
 
+        public User GetUser(int UserId) {
+            return _userRepository.GetUser(UserId);
+        }
+
         public List<User> GetUsers() {
             return _userRepository.GetUsers();
         }

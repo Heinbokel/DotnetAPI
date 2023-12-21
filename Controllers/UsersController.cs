@@ -6,13 +6,19 @@ namespace DotnetAPI.Controllers;
 
 [ApiController]
 [Route("[controller]")]
-public class UserController : ControllerBase
+public class UsersController : ControllerBase
 {
 
     private IUserService _userService;
 
-    public UserController(IUserService userService) {
+    public UsersController(IUserService userService) {
         this._userService = userService;
+    }
+
+    [HttpGet("Users/{UserId}", Name = "User")]
+    public User GetUser(int UserId)
+    {
+        return _userService.GetUser(UserId);
     }
 
 

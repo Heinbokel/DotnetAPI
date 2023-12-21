@@ -3,8 +3,8 @@ using DotnetAPI.Models;
 namespace DotnetAPI.Services {
 
 public interface IUserService {
-
-    public List<User> GetUsers();
+        public User GetUser(int userId);
+        public List<User> GetUsers();
 
 }
 
