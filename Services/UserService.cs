@@ -1,3 +1,4 @@
+using DotnetAPI.Models;
 using DotnetAPI.Repositories;
 
 namespace DotnetAPI.Services {
@@ -10,8 +11,8 @@ namespace DotnetAPI.Services {
             _userRepository = userRepository;
         }
 
-        public string[] GetAllUsers() {
-            return _userRepository.GetAllUsers();
+        public List<User> GetUsers() {
+            return _userRepository.GetUsers();
         }
 
     }

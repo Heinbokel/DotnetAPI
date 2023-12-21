@@ -1,3 +1,4 @@
+using DotnetAPI.Models;
 using DotnetAPI.Services;
 using Microsoft.AspNetCore.Mvc;
 
@@ -15,10 +16,10 @@ public class UserController : ControllerBase
     }
 
 
-    [HttpGet("test/{testValue}", Name = "Test")]
-    public string[] Test(string testValue, [FromQuery] string fromQuery1)
+    [HttpGet("", Name = "Users")]
+    public List<User> GetUsers()
     {
-        return _userService.GetAllUsers();
+        return _userService.GetUsers();
     }
 
 }

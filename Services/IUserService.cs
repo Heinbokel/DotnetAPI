@@ -1,8 +1,10 @@
+using DotnetAPI.Models;
+
 namespace DotnetAPI.Services {
 
 public interface IUserService {
 
-    public string[] GetAllUsers();
+    public List<User> GetUsers();
 
 }
 

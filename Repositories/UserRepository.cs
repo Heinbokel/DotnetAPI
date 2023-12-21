@@ -1,6 +1,7 @@
 
 using System.Data;
 using Dapper;
+using DotnetAPI.Models;
 using DotnetAPI.Repositories.Configuration;
 
 namespace DotnetAPI.Repositories {
@@ -15,9 +16,13 @@ namespace DotnetAPI.Repositories {
             this._dbConnection = dbConnection;
         }
 
-        public string[] GetAllUsers() {
-            return new string[] {
-                "SUCCESSFUL RETRIEVAL", this._dbConnection.ConnectionString, "ANOTHER STRING", this._dbConnection.QuerySingle<DateTime>("SELECT GETDATE()").ToString()
+        public List<User> GetUsers() {
+            return new List<User>() {
+                new User(){UserId = 1, Active = true, Email = "email@gmail.com", FirstName = "first", LastName = "lasdfast", Gender = "male"},
+                new User(){UserId = 2, Active = true, Email = "312@gmail.com", FirstName = "firstt", LastName = "lasdfast", Gender = "female"},
+                new User(){UserId = 3, Active = true, Email = "4234@gmail.com", FirstName = "fitttrst", LastName = "laasdst", Gender = "female"},
+                new User(){UserId = 4, Active = false, Email = "5253@gmail.com", FirstName = "firttst", LastName = "lasdfast", Gender = "male"},
+                new User(){UserId = 5, Active = true, Email = "523532@yahoo.com", FirstName = "ftttirst", LastName = "last", Gender = "female"}
             };
         }
 
