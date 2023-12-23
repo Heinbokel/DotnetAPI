@@ -18,16 +18,16 @@ namespace DotnetAPI.Repositories {
         ".Trim();
 
         private static readonly string CREATE_USER_SQL = @"
-            CREATE TABLE #InsertedUser (UserId INT);
+            DECLARE @InsertedUserId INT;            
             INSERT INTO
-                TutorialAppSchema.Users(
+                    TutorialAppSchema.Users(
                     FirstName,
                     LastName,
                     Email,
                     Gender,
                     Active
                 )
-                OUTPUT inserted.UserId INTO #InsertedUser
+                OUTPUT inserted.UserId INTO @InsertedUserId;
                 VALUES (
                     @FirstName,
                     @LastName,
@@ -35,9 +35,7 @@ namespace DotnetAPI.Repositories {
                     @Gender,
                     @Active
                 )
-            SELECT UserId FROM #InsertedUser;
-
-            DROP TABLE #InsertedUser;
+            SELECT @InsertedUserId AS InsertedUserId;
         ".Trim();
 
         private static readonly string UPDATE_USER_SQL = @"";
