@@ -1,4 +1,5 @@
 using DotnetAPI.Models;
+using DotnetAPI.Models.Requests;
 using DotnetAPI.Repositories;
 
 namespace DotnetAPI.Services {
@@ -17,6 +18,21 @@ namespace DotnetAPI.Services {
 
         public List<User> GetUsers() {
             return _userRepository.GetUsers();
+        }
+
+        public int CreateUser(CreateUserRequest Request)
+        {
+            return _userRepository.CreateUser(Request);
+        }
+
+        public User UpdateUser(UpdateUserRequest Request)
+        {
+            return _userRepository.UpdateUser(Request);
+        }
+
+        public void DeleteUser(int UserId)
+        {
+            _userRepository.DeleteUser(UserId);
         }
 
     }

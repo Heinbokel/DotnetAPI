@@ -1,4 +1,5 @@
 using DotnetAPI.Models;
+using DotnetAPI.Models.Requests;
 using DotnetAPI.Services;
 using Microsoft.AspNetCore.Mvc;
 
@@ -26,6 +27,16 @@ public class UsersController : ControllerBase
     public List<User> GetUsers()
     {
         return _userService.GetUsers();
+    }
+
+    [HttpPost("", Name = "Users")]
+    public IActionResult CreateUser(CreateUserRequest request) {
+        return Ok(_userService.CreateUser(request));
+    }
+
+    [HttpPut("", Name = "Users")]
+    public IActionResult UpdateUser(UpdateUserRequest request) {
+        return Ok(_userService.UpdateUser(request));
     }
 
 }
