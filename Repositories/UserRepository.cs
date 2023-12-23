@@ -11,11 +11,11 @@ namespace DotnetAPI.Repositories {
 
         private static readonly string GET_USERS_SQL = @"
             SELECT * FROM TutorialAppSchema.Users
-        ".Trim();
+        ";
 
         private static readonly string WHERE_USER_ID_EQUALS = @"
             WHERE TutorialAppSchema.Users.UserId = @UserId
-        ".Trim();
+        ";
 
         private static readonly string CREATE_USER_SQL = @"
             DECLARE @InsertedUserId INT;            
@@ -36,7 +36,7 @@ namespace DotnetAPI.Repositories {
                     @Active
                 )
             SELECT @InsertedUserId AS InsertedUserId;
-        ".Trim();
+        ";
 
         private static readonly string UPDATE_USER_SQL = @"
             UPDATE 
@@ -47,13 +47,13 @@ namespace DotnetAPI.Repositories {
                 Email = @Email,
                 Gender = @Gender,
                 Active = @Active
-
-            WHERE
-                UserId = @UserId
-        ".Trim();
+        ";
 
 
-        private static readonly string DELETE_USER_SQL = @"";
+        private static readonly string DELETE_USER_SQL = @"
+            DELETE FROM
+                TutorialAppSchema.Users
+        ";
 
 
         private IDbConnection _dbConnection;
@@ -95,7 +95,7 @@ namespace DotnetAPI.Repositories {
                 Active = Request.Active,
                 UserId = UserId
             };
-            _dbConnection.Execute(UPDATE_USER_SQL, Params);
+            _dbConnection.Execute(UPDATE_USER_SQL + WHERE_USER_ID_EQUALS, Params);
             return new User(){
                 UserId = UserId,
                 FirstName = Request.FirstName,
@@ -108,7 +108,10 @@ namespace DotnetAPI.Repositories {
 
         public void DeleteUser(int UserId)
         {
-            _dbConnection.Query(DELETE_USER_SQL);
+            var Params = new{
+                UserId = UserId
+            };
+            _dbConnection.Execute(DELETE_USER_SQL +  WHERE_USER_ID_EQUALS, Params);
         }
     }
 

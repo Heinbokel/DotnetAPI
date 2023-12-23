@@ -39,4 +39,10 @@ public class UsersController : ControllerBase
         return Ok(_userService.UpdateUser(Request, UserId));
     }
 
+    [HttpDelete("Users/{UserId}", Name = "DeleteUser")]
+    public IActionResult DeleteUser(int UserId) {
+        _userService.DeleteUser(UserId);
+        return Ok();
+    }
+
 }
