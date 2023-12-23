@@ -38,7 +38,19 @@ namespace DotnetAPI.Repositories {
             SELECT @InsertedUserId AS InsertedUserId;
         ".Trim();
 
-        private static readonly string UPDATE_USER_SQL = @"";
+        private static readonly string UPDATE_USER_SQL = @"
+            UPDATE 
+                TutorialAppSchema.Users
+            SET 
+                FirstName = @FirstName,
+                LastName = @LastName,
+                Email = @Email,
+                Gender = @Gender,
+                Active = @Active
+
+            WHERE
+                UserId = @UserId
+        ".Trim();
 
 
         private static readonly string DELETE_USER_SQL = @"";
@@ -73,9 +85,25 @@ namespace DotnetAPI.Repositories {
             return _dbConnection.QuerySingle<int>(CREATE_USER_SQL, Params);
         }
 
-        public User UpdateUser(UpdateUserRequest Request)
+        public User UpdateUser(UpdateUserRequest Request, int UserId)
         {
-            return _dbConnection.QuerySingle<User>(UPDATE_USER_SQL);
+            var Params = new {
+                FirstName = Request.FirstName,
+                LastName = Request.LastName,
+                Email = Request.Email,
+                Gender = Request.Gender,
+                Active = Request.Active,
+                UserId = UserId
+            };
+            _dbConnection.Execute(UPDATE_USER_SQL, Params);
+            return new User(){
+                UserId = UserId,
+                FirstName = Request.FirstName,
+                LastName = Request.LastName,
+                Email = Request.Email,
+                Gender = Request.Gender,
+                Active = Request.Active,
+            };
         }
 
         public void DeleteUser(int UserId)

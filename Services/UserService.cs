@@ -25,9 +25,9 @@ namespace DotnetAPI.Services {
             return _userRepository.CreateUser(Request);
         }
 
-        public User UpdateUser(UpdateUserRequest Request)
+        public User UpdateUser(UpdateUserRequest Request, int UserId)
         {
-            return _userRepository.UpdateUser(Request);
+            return _userRepository.UpdateUser(Request, UserId);
         }
 
         public void DeleteUser(int UserId)

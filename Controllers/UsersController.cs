@@ -29,14 +29,14 @@ public class UsersController : ControllerBase
         return _userService.GetUsers();
     }
 
-    [HttpPost("", Name = "Users")]
-    public IActionResult CreateUser(CreateUserRequest request) {
-        return Ok(_userService.CreateUser(request));
+    [HttpPost("", Name = "CreateUser")]
+    public IActionResult CreateUser(CreateUserRequest Request) {
+        return Ok(_userService.CreateUser(Request));
     }
 
-    [HttpPut("", Name = "Users")]
-    public IActionResult UpdateUser(UpdateUserRequest request) {
-        return Ok(_userService.UpdateUser(request));
+    [HttpPut("Users/{UserId}", Name = "UpdateUser")]
+    public IActionResult UpdateUser(UpdateUserRequest Request, int UserId) {
+        return Ok(_userService.UpdateUser(Request, UserId));
     }
 
 }

@@ -10,7 +10,7 @@ public interface IUserRepository {
 
     public int CreateUser(CreateUserRequest Request);
 
-    public User UpdateUser(UpdateUserRequest Request);
+    public User UpdateUser(UpdateUserRequest Request, int UserId);
 
     public void DeleteUser(int UserId);
 
