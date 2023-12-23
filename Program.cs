@@ -36,8 +36,9 @@ builder.Services.AddCors((options) =>
 //Add our mappings for dependency injection.
 
 //Repositories
+builder.Services.AddScoped<DataContextEF>();
 builder.Services.AddScoped<IDbConnection>(_ => new SqlConnection(builder.Configuration.GetConnectionString("DefaultConnection")));
-builder.Services.AddScoped<IUserRepository, UserRepository>();
+builder.Services.AddScoped<IUserRepository, UserRepositoryEF>();
 
 //Services
 builder.Services.AddScoped<IUserService, UserService>();

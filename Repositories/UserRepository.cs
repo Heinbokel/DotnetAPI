@@ -111,7 +111,10 @@ namespace DotnetAPI.Repositories {
             var Params = new{
                 UserId = UserId
             };
-            _dbConnection.Execute(DELETE_USER_SQL +  WHERE_USER_ID_EQUALS, Params);
+            int deletedRows = _dbConnection.Execute(DELETE_USER_SQL +  WHERE_USER_ID_EQUALS, Params);
+            if (deletedRows < 1) {
+                throw new Exception($"User {UserId} not found for deletion");
+            }
         }
     }
 

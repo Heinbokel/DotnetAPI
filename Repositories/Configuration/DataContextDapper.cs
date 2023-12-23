@@ -3,11 +3,11 @@ using Microsoft.Data.SqlClient;
 
 namespace DotnetAPI.Repositories.Configuration {
     
-public class DatabaseConnectionFactory {
+public class DataContextDapper {
 
     private readonly string _connectionString;
 
-    public DatabaseConnectionFactory(string connectionString) {
+    public DataContextDapper(string connectionString) {
         this._connectionString = connectionString;
     }
 
