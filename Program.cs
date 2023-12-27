@@ -26,7 +26,7 @@ builder.Services.AddCors((options) =>
             });
         options.AddPolicy("ProdCors", (corsBuilder) =>
             {
-                corsBuilder.WithOrigins("https://myProductionSite.com")
+                corsBuilder.WithOrigins("https://bobhomeuploadtest1.azurewebsites.net")
                     .AllowAnyMethod()
                     .AllowAnyHeader()
                     .AllowCredentials();
@@ -57,6 +57,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 } else {
+    app.UseSwagger();
+    app.UseSwaggerUI();
     app.UseCors("ProdCors");
     app.UseHttpsRedirection(); // We don't want this while in development locally, generally causes more issues than anything else.
 }
